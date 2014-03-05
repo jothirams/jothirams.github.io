@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: development | Thoughts..]]></title>
+  <link href="http://jothirams.github.io/categories/development/atom.xml" rel="self"/>
+  <link href="http://jothirams.github.io/"/>
+  <updated>2014-03-05T17:52:07+01:00</updated>
+  <id>http://jothirams.github.io/</id>
+  <author>
+    <name><![CDATA[Jothiram Selvam]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Simplicity Over Complexity and Ease]]></title>
+    <link href="http://jothirams.github.io/simplicity-over-complexity-and-ease/"/>
+    <updated>2014-03-05T17:42:21+01:00</updated>
+    <id>http://jothirams.github.io/simplicity-over-complexity-and-ease</id>
+    <content type="html"><![CDATA[<h3>Simplicity over Complexity &amp; Ease</h3>
+
+<p>Software development doesn’t have any defined boundaries. If you want to build or manufacture a table, it needs the length, breadth, width, height from the floor, the material in which you want to make it. And all you can do is manipulate the material and the dimensions within these boundaries. While software development also has a boundary, it is not the one that is clearly defined.</p>
+
+<p>One way why I feel they are this way is because &ndash; the boundary itself is a user’s usability. For example, if we want to create a simple, standard and the world famous “hello world” program, then the defacto standard is to just print hello world. This would be sufficient if you are only going to use this application practically. And for most users of the program that is true. They would just be happy when the program prints hello world.</p>
+
+<p>But we developers are not the users (are we).. The developers and the product marketing engineers will site together in a conference room and discuss on different ways to print it out. We would think up of print every character of the sentence in a separate line, we will discuss if we have to print the H and W in upper or lower case, should we add a full stop at the end or not.</p>
+
+<p>Though I’m over exaggerating, sometimes the discussion does go overboard. We tend to over engineer simple things. We miss sometimes the practical usability and concentrate more on theoretically possibilities and decide to code that way. This introduces complexity, which sometimes are not visible for the developer who wrote the code, but will come back and bite the maintainer of the code.</p>
+
+<p>So the approach should be &ndash; always choose simplicity over complexity (a point that has been made multiple times by product gurus). I’m just using different words while I still mean the same old <a href="http://simple.wikipedia.org/wiki/KISS_(principle)">KISS Principle</a> &ndash; Keep It Simple Stupid</p>
+
+<p>While I recommend simplicity, lets go to the other end of the circle of developers who mistake simplicity to easy of implementation. Sometimes it is easy to print just hello world directly. However, you should think about the possibility to extend the design with minimal changes and how your users will be affected. For instance, if the user runs the program with his name as an argument you should be able to print “hello name” instead. That is extensibility. At the same time, you should print with a new line at the end. Otherwise the user will not be able to identify the print output itself.</p>
+
+<p>So choosing easy of implementation is equally dangerous (the danger lies in the future extensibility), as to choosing complexity (which will waste your precious time now).</p>
+
+<p>Lets revisit the manufacturing shop of the table. I did not mean to say that we cannot introduce the same easy of manufacturing or the complexity in building the same table. We could choose to build a simple and not so comfortable table or we could choose a table with a motor and a sensor that will see how tall the person is and will automatically adjust the height of the table. What I meant to say was, the table manufactures and the users are on the same plane here. The users don’t require such a complexity while the table manufacturers will not spend their time and effort in building a complex one nor will they build a simple one as they have to sell the table in the end.</p>
+
+<p>The goal for me is to build a product that fixes the practical problems without overarching in trying to fix every problem that could eventually occur in the world of probabilities.</p>
+
+<p>Choose simplicity over complexity and ease.</p>
+]]></content>
+  </entry>
+  
+</feed>
