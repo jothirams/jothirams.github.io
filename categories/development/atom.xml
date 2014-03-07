@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: development | Thoughts...]]></title>
-  <link href="http://jothirams.github.io/categories/development/atom.xml" rel="self"/>
-  <link href="http://jothirams.github.io/"/>
-  <updated>2014-03-06T14:10:46+01:00</updated>
-  <id>http://jothirams.github.io/</id>
+  <link href="http://www.jothirams.com/categories/development/atom.xml" rel="self"/>
+  <link href="http://www.jothirams.com/"/>
+  <updated>2014-03-07T16:42:21+01:00</updated>
+  <id>http://www.jothirams.com/</id>
   <author>
     <name><![CDATA[Jothiram Selvam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Simplicity Over Complexity and Ease]]></title>
-    <link href="http://jothirams.github.io/simplicity-over-complexity-and-ease/"/>
+    <link href="http://www.jothirams.com/simplicity-over-complexity-and-ease/"/>
     <updated>2014-03-05T17:42:21+01:00</updated>
-    <id>http://jothirams.github.io/simplicity-over-complexity-and-ease</id>
+    <id>http://www.jothirams.com/simplicity-over-complexity-and-ease</id>
     <content type="html"><![CDATA[<h3>Simplicity over Complexity &amp; Ease</h3>
 
 <p>Software development doesn’t have any defined boundaries. Let&rsquo;s take an example from a different field here. If you want to build or manufacture a table, it needs the length, breadth, width, height from the floor, the material in which you want to make it. And all you can do is manipulate the material and the dimensions within these boundaries. While software development also has a boundary, it is not the one that is <strong><em>clearly defined</em></strong>.</p>
