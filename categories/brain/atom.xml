@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: brain | Thoughts...]]></title>
+  <link href="http://www.jothirams.com/categories/brain/atom.xml" rel="self"/>
+  <link href="http://www.jothirams.com/"/>
+  <updated>2014-11-15T22:24:25+01:00</updated>
+  <id>http://www.jothirams.com/</id>
+  <author>
+    <name><![CDATA[Jothiram Selvam]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Anchoring Effect]]></title>
+    <link href="http://www.jothirams.com/anchoring-effect/"/>
+    <updated>2014-04-28T16:42:15+02:00</updated>
+    <id>http://www.jothirams.com/anchoring-effect</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m currently reading the book <a href="http://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555/ref=sr_1_1?ie=UTF8&amp;qid=1398694577&amp;sr=8-1&amp;keywords=thinking+fast+thinking+slow">Thinking Fast and Slow</a> from Daniel Kahneman and I hit upon an interesting fact about Anchoring effect.</p>
+
+<p>So lets first try this with you. Could you answer the following questions:</p>
+
+<blockquote><p>Was Mahatma Gandhi 35 years old when he died? [yes/no]  <br/>
+How old was Mahatma Gandhi when he died?</p></blockquote>
+
+<p>Let&rsquo;s try another question:</p>
+
+<blockquote><p>Is Mount Everest 80,000 feet in height? [yes/no]<br/>
+What is the height of Mount Everest?</p></blockquote>
+
+<p>Answering these questions before you continue will help you in understanding and realizing this effect better;</p>
+
+<p>Now, after you have answered you can find the correct answers of Mahatma Gandhi&rsquo;s age and Mount Everest&rsquo;s height at the bottom of this post.</p>
+
+<p>If you would have noticed, you might have guessed a little bit higher than 35 years as the age of Mahatma Gandhi when he died, as you might have had a gut feeling that he was not that young during his death. Similarly you would have come up the height of Mount Everest a bit lower than the 80,000 feet that was mentioned in the question earlier, as you might have a intution that 80,000 feet is far too high for a mountain. Please note that, this kind of inference is done only by people who don&rsquo;t know the real answer.</p>
+
+<p>This is what Daniel Kahneman says is <strong>Anchoring Effect</strong>. The point he makes is, once your System 1 (the subconsious brain of yours), picks up a relative answer and when a question is thrown at you for which you don&rsquo;t know the answer then you simply choose the new answer that you derive from the <em>anchor</em> value that your brain had just registered.</p>
+
+<p>This is a very interesting point in understanding (one of the topics of) behavioural economics. This gives you a insight of how you could have been judging and coming to conclusions. You might see this behavior when you are buying goods. Instead of considering it at a face value whether the product price is worthy of its value, you always consider it in comparison with what is already wired in your brain.</p>
+
+<p>From now on, when you arrive at a value or an assumption please first check whether it is due to the <strong>achoring effect</strong> or whether you have reached that because of its significance to the task at hand.</p>
+
+<p>Happy <em>Anchoring</em>!!</p>
+
+<hr />
+
+<p>Mahatma Gandhi was <a href="http://en.wikipedia.org/wiki/Gandhi">78 years old</a> when he died.</p>
+
+<p>Mount Everest is <a href="http://en.wikipedia.org/wiki/Mount_Everest">29,029 ft</a> in height.</p>
+]]></content>
+  </entry>
+  
+</feed>
