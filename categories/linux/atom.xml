@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Thoughts...]]></title>
   <link href="http://www.jothirams.com/categories/linux/atom.xml" rel="self"/>
   <link href="http://www.jothirams.com/"/>
-  <updated>2014-11-16T19:10:47+01:00</updated>
+  <updated>2014-11-16T19:12:05+01:00</updated>
   <id>http://www.jothirams.com/</id>
   <author>
     <name><![CDATA[Jothiram Selvam]]></name>
@@ -128,7 +128,7 @@ If you want to drop the file from cache, the `advice` should be:
 - `echo 3 &gt; /proc/sys/vm/drop_caches` - Will free pagecache, dentries and inodes
 </code></pre>
 
-<h3>Customizing /proc/sys/vm/</h3>
+<h3>Tuning /proc/sys/vm/</h3>
 
 <p>You can control the below values which would help you in freeing up the cache more often.</p>
 
