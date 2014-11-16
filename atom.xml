@@ -4,7 +4,7 @@
   <title><![CDATA[Thoughts...]]></title>
   <link href="http://www.jothirams.com/atom.xml" rel="self"/>
   <link href="http://www.jothirams.com/"/>
-  <updated>2014-11-15T22:35:36+01:00</updated>
+  <updated>2014-11-16T09:25:17+01:00</updated>
   <id>http://www.jothirams.com/</id>
   <author>
     <name><![CDATA[Jothiram Selvam]]></name>
@@ -12,6 +12,216 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux Cached My Memory]]></title>
+    <link href="http://www.jothirams.com/linux-cached-my-memory/"/>
+    <updated>2014-11-15T16:34:25+01:00</updated>
+    <id>http://www.jothirams.com/linux-cached-my-memory</id>
+    <content type="html"><![CDATA[<p>We were running a <a href="https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller">BMC firmware (If you don’t know already, find out what the heck it is?)</a> on top of our custom linux kernel and one fine day we realized that we have developed so many applications that we forgot checking how much memory these applications were using and we were running low on available RAM.</p>
+
+<p>The first thing we saw was, the <code>cached</code> memory in <code>/etc/procmeminfo</code> was too high.</p>
+
+<p>We eventually found what cached was and how we can limit/free it at will. So, lets take a stroll down the memory lane&hellip;</p>
+
+<h2>What is Cached</h2>
+
+<p>In linux there are two things that are part of the of file page cache. The kernel caches</p>
+
+<ul>
+<li>The files that your processes access</li>
+<li>The RAM based filesystems, such as tmpfs/ramfs, are also part of the cache.</li>
+</ul>
+
+
+<h3>RAM File System Caching</h3>
+
+<p>The <a href="https://www.kernel.org/doc/Documentation/filesystems/tmpfs.txt">kernel tmpfs documentation</a> notes that</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Since tmpfs lives completely in the page cache and on swap, all tmpfs
+</span><span class='line'>pages currently in memory will show up as cached. It will not show up
+</span><span class='line'>as shared or something like that
+</span><span class='line'>
+</span><span class='line'>tmpfs has three mount options for sizing:
+</span><span class='line'>
+</span><span class='line'>size:      The limit of allocated bytes for this tmpfs instance. The 
+</span><span class='line'>           default is half of your physical RAM without swap. 
+</span><span class='line'>           
+</span><span class='line'>           **If you oversize your tmpfs instances the machine will deadlock
+</span><span class='line'>           since the OOM handler will not be able to free that memory.**
+</span><span class='line'>           
+</span><span class='line'>nr_blocks: The same as size, but in blocks of PAGE_CACHE_SIZE.
+</span><span class='line'>nr_inodes: The maximum number of inodes for this instance. The default
+</span><span class='line'>           is half of the number of your physical RAM pages, or (on a
+</span><span class='line'>           machine with highmem) the number of lowmem RAM pages,
+</span><span class='line'>           whichever is the lower.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To be more clear, any file that you place in your tmpfs will be in the cache forever, till it is deleted. So the downside of tmpfs is, if you oversize the tmpfs eventually the OOM killer will start killing your running processes to get more RAM space, as it cannot free the files in tmpfs from cache unless you have swap (in embedded linux, you don’t have it &ndash; which means you are stuck forever in RAM)</p>
+
+<h3>File Caching</h3>
+
+<p>Anytime a process opens a file, the kernel automatically caches the file there by making subsequent I/O calls to the file faster as it is done in the memory instead of directly on the disk.</p>
+
+<h3>Eviction from the cache</h3>
+
+<p>Kernel automatically reclaims the pagecache when other processes or kernel needs memory. However, if the file is in use then the kernel wouldn’t be able to free the cache. And if the whole system is running short of memory, then the Out-Of-Memory (OOM) killer is called.</p>
+
+<p>After a file is closed, it may still be part of the cache in case the process again tries to open it. But this is in a reclaimable part of the cache, which means if more memory is necessary this closed file will be evicted from the memory.</p>
+
+<p>A file in RAM filesystem will be part of the cache. Uneeded pages will be swapped to swap. If you don’t have swap, then unless you delete the file it is part of cache.</p>
+
+<h2>Best practices for reducing the cache</h2>
+
+<h3>RAM based FileSystem</h3>
+
+<p>When you mount, you can restrict the maximum size of the tmpfs. Note that you cannot limit it using ramfs. Because, <a href="https://www.kernel.org/doc/Documentation/filesystems/tmpfs.txt">as noted in the tmpfs documentation</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>If you compare it to ramfs (which was the template to create tmpfs)
+</span><span class='line'>you gain swapping and limit checking. Another similar thing is the RAM
+</span><span class='line'>disk (/dev/ram*), which simulates a fixed size hard disk in physical
+</span><span class='line'>RAM, where you have to create an ordinary filesystem on top. Ramdisks
+</span><span class='line'>cannot swap and you do not have the possibility to resize them. </span></code></pre></td></tr></table></div></figure>
+
+
+<p>So the bottom line is: <em>tmpfs is a better option than ramfs</em>, as you can add swap and also limit the mount size.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># mount -t tmpfs -o size=60M tmpfs /tmp -&gt; Size limited to 60M</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Operating on a file</h3>
+
+<p>If you are operating on a file of substantial size, then after the end of the file access you can use <a href="http://linux.die.net/man/2/posix_fadvise">posix_fadvise</a> to evict this file from the cache immediately. This is a much safer option, as you will only evict your file instead of the other files that are being cached.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;fcntl.h&gt;
+</span><span class='line'>
+</span><span class='line'>int posix_fadvise(int fd, off_t offset, off_t len, int advice);
+</span><span class='line'>
+</span><span class='line'>If you want to drop the file from cache, the `advice` should be:
+</span><span class='line'>  POSIX_FADV_DONTNEED : The specified data will not be accessed in the near future.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Global Drop Cache</h3>
+
+<p>If you want to drop caches of the whole system then write</p>
+
+<pre><code>- `echo 1 &gt; /proc/sys/vm/drop_caches` - Will free pagecache
+- `echo 2 &gt; /proc/sys/vm/drop_caches` - Will free dentries and inodes
+- `echo 3 &gt; /proc/sys/vm/drop_caches` - Will free pagecache, dentries and inodes
+</code></pre>
+
+<h2>Caching Tools</h2>
+
+<h3>fincore</h3>
+
+<p>This is a nice utility, part of <a href="https://code.google.com/p/linux-ftools/">linux-ftools</a>. You have to give the file name as input, and it will stats for the files that are in the cache now. <em>Hint: Running it on files that are part of tmpfs will show that these files are always in cache</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># fincore --pages=false --summarize --only-cached &lt;file_name&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>fincore [options] files...
+</span><span class='line'>
+</span><span class='line'>  --pages=false      Do not print pages
+</span><span class='line'>  --summarize        When comparing multiple files, print a summary report
+</span><span class='line'>  --only-cached      Only print stats for files that are actually in cache.
+</span><span class='line'>
+</span><span class='line'>root@xxxxxx:/var/lib/mysql/blogindex# fincore --pages=false --summarize --only-cached * 
+</span><span class='line'>stats for CLUSTER_LOG_2010_05_21.MYI: file size=93840384 , total pages=22910 , cached pages=1 , cached size=4096, cached perc=0.004365 
+</span><span class='line'>stats for CLUSTER_LOG_2010_05_22.MYI: file size=417792 , total pages=102 , cached pages=1 , cached size=4096, cached perc=0.980392 
+</span><span class='line'>stats for CLUSTER_LOG_2010_05_23.MYI: file size=826368 , total pages=201 , cached pages=1 , cached size=4096, cached perc=0.497512 
+</span><span class='line'>stats for CLUSTER_LOG_2010_05_24.MYI: file size=192512 , total pages=47 , cached pages=1 , cached size=4096, cached perc=2.127660 
+</span><span class='line'>stats for CLUSTER_LOG_2010_06_03.MYI: file size=345088 , total pages=84 , cached pages=43 , cached size=176128, cached perc=51.190476 
+</span><span class='line'>stats for CLUSTER_LOG_2010_06_04.MYD: file size=1478552 , total pages=360 , cached pages=97 , cached size=397312, cached perc=26.944444 
+</span><span class='line'>stats for CLUSTER_LOG_2010_06_04.MYI: file size=205824 , total pages=50 , cached pages=29 , cached size=118784, cached perc=58.000000 
+</span><span class='line'>stats for COMMENT_CONTENT_2010_06_03.MYI: file size=100051968 , total pages=24426 , cached pages=10253 , cached size=41996288, cached perc=41.975764 
+</span><span class='line'>stats for COMMENT_CONTENT_2010_06_04.MYD: file size=716369644 , total pages=174894 , cached pages=79821 , cached size=326946816, cached perc=45.639645 
+</span><span class='line'>stats for COMMENT_CONTENT_2010_06_04.MYI: file size=56832000 , total pages=13875 , cached pages=5365 , cached size=21975040, cached perc=38.666667 
+</span><span class='line'>stats for FEED_CONTENT_2010_06_03.MYI: file size=1001518080 , total pages=244511 , cached pages=98975 , cached size=405401600, cached perc=40.478751 
+</span><span class='line'>stats for FEED_CONTENT_2010_06_04.MYD: file size=9206385684 , total pages=2247652 , cached pages=1018661 , cached size=4172435456, cached perc=45.321117 
+</span><span class='line'>stats for FEED_CONTENT_2010_06_04.MYI: file size=638005248 , total pages=155763 , cached pages=52912 , cached size=216727552, cached perc=33.969556 
+</span><span class='line'>stats for FEED_CONTENT_2010_06_04.frm: file size=9840 , total pages=2 , cached pages=3 , cached size=12288, cached perc=150.000000 
+</span><span class='line'>stats for PERMALINK_CONTENT_2010_06_03.MYI: file size=1035290624 , total pages=252756 , cached pages=108563 , cached size=444674048, cached perc=42.951700 
+</span><span class='line'>stats for PERMALINK_CONTENT_2010_06_04.MYD: file size=55619712720 , total pages=13579031 , cached pages=6590322 , cached size=26993958912, cached perc=48.533080 
+</span><span class='line'>stats for PERMALINK_CONTENT_2010_06_04.MYI: file size=659397632 , total pages=160985 , cached pages=54304 , cached size=222429184, cached perc=33.732335 
+</span><span class='line'>stats for PERMALINK_CONTENT_2010_06_04.frm: file size=10156 , total pages=2 , cached pages=3 , cached size=12288,</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>vmtouch</h3>
+
+<p>If you want to modify the files in cache, then you can use <a href="https://github.com/hoytech/vmtouch/blob/master/vmtouch.pod">vmtouch</a>. With vmtouch you can</p>
+
+<ul>
+<li>Evict files from cache</li>
+<li>Keep a file always in cache, without giving it a possibility to be evicted</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>Damn, be extra careful with what you keep in your cache memory. That determines whether you system works as you want it to or not, esp in an embedded linux world.</p>
+
+<p>I will write few more blog entries on how we eventually managed to handle all the memory issues in our firmware.</p>
+
+<p>If you have more tools or thoughts on handling cache better, let me know in the comments.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Anchoring Effect]]></title>

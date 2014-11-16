@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Thoughts...</title>
+	<title>Linux Cached My Memory - Thoughts...</title>
 	<meta name="author" content="Jothiram Selvam">
 
 	
@@ -77,18 +77,9 @@
 	
 		
 	
-	<div id="content" class="inner">
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/linux-cached-my-memory/">
-		
-			Linux Cached My Memory</a>
-	</h2>
-	<div class="entry-content">
-		<p>We were running a <a href="https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller">BMC firmware (If you don’t know already, find out what the heck it is?)</a> on top of our custom linux kernel and one fine day we realized that we have developed so many applications that we forgot checking how much memory these applications were using and we were running low on available RAM.</p>
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Linux Cached My Memory</h2>
+	<div class="entry-content"><p>We were running a <a href="https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller">BMC firmware (If you don’t know already, find out what the heck it is?)</a> on top of our custom linux kernel and one fine day we realized that we have developed so many applications that we forgot checking how much memory these applications were using and we were running low on available RAM.</p>
 
 <p>The first thing we saw was, the <code>cached</code> memory in <code>/etc/procmeminfo</code> was too high.</p>
 
@@ -290,10 +281,7 @@
 <p>I will write few more blog entries on how we eventually managed to handle all the memory issues in our firmware.</p>
 
 <p>If you have more tools or thoughts on handling cache better, let me know in the comments.</p>
-
-		
-		
-	</div>
+</div>
 
 
 <div class="meta">
@@ -321,145 +309,25 @@
 </div>
 </article>
 
-
-    <article class="post">
-	<h2 class="title">
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
 		
-		<a href="/anchoring-effect/">
 		
-			Anchoring Effect</a>
-	</h2>
-	<div class="entry-content">
-		<p>I&rsquo;m currently reading the book <a href="http://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555/ref=sr_1_1?ie=UTF8&amp;qid=1398694577&amp;sr=8-1&amp;keywords=thinking+fast+thinking+slow">Thinking Fast and Slow</a> from Daniel Kahneman and I hit upon an interesting fact about Anchoring effect.</p>
-
-<p>So lets first try this with you. Could you answer the following questions:</p>
-
-<blockquote><p>Was Mahatma Gandhi 35 years old when he died? [yes/no]  <br/>
-How old was Mahatma Gandhi when he died?</p></blockquote>
-
-<p>Let&rsquo;s try another question:</p>
-
-<blockquote><p>Is Mount Everest 80,000 feet in height? [yes/no]<br/>
-What is the height of Mount Everest?</p></blockquote>
-
-<p>Answering these questions before you continue will help you in understanding and realizing this effect better;</p>
-
-<p>Now, after you have answered you can find the correct answers of Mahatma Gandhi&rsquo;s age and Mount Everest&rsquo;s height at the bottom of this post.</p>
-
-<p>If you would have noticed, you might have guessed a little bit higher than 35 years as the age of Mahatma Gandhi when he died, as you might have had a gut feeling that he was not that young during his death. Similarly you would have come up the height of Mount Everest a bit lower than the 80,000 feet that was mentioned in the question earlier, as you might have a intution that 80,000 feet is far too high for a mountain. Please note that, this kind of inference is done only by people who don&rsquo;t know the real answer.</p>
-
-<p>This is what Daniel Kahneman says is <strong>Anchoring Effect</strong>. The point he makes is, once your System 1 (the subconsious brain of yours), picks up a relative answer and when a question is thrown at you for which you don&rsquo;t know the answer then you simply choose the new answer that you derive from the <em>anchor</em> value that your brain had just registered.</p>
-
-<p>This is a very interesting point in understanding (one of the topics of) behavioural economics. This gives you a insight of how you could have been judging and coming to conclusions. You might see this behavior when you are buying goods. Instead of considering it at a face value whether the product price is worthy of its value, you always consider it in comparison with what is already wired in your brain.</p>
-
-<p>From now on, when you arrive at a value or an assumption please first check whether it is due to the <strong>achoring effect</strong> or whether you have reached that because of its significance to the task at hand.</p>
-
-<p>Happy <em>Anchoring</em>!!</p>
-
-<hr />
-
-<p>Mahatma Gandhi was <a href="http://en.wikipedia.org/wiki/Gandhi">78 years old</a> when he died.</p>
-
-<p>Mount Everest is <a href="http://en.wikipedia.org/wiki/Mount_Everest">29,029 ft</a> in height.</p>
-
+		<a class="addthis_button_tweet"></a>
+		
 		
 		
 	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-28T16:42:15+02:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/categories/brain/'>brain</a>
-
-
-</div>
 	
 </div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/simplicity-over-complexity-and-ease/">
-		
-			Simplicity Over Complexity and Ease</a>
-	</h2>
-	<div class="entry-content">
-		<h3>Simplicity over Complexity &amp; Ease</h3>
-
-<p>Software development doesn’t have any defined boundaries. Let&rsquo;s take an example from a different field here. If you want to build or manufacture a table, it needs the length, breadth, width, height from the floor, the material in which you want to make it. And all you can do is manipulate the material and the dimensions within these boundaries. While software development also has a boundary, it is not the one that is <strong><em>clearly defined</em></strong>.</p>
-
-<p>One reason why they are this way is because the boundary itself is a user’s perspective of <em>usability</em> which is changes from person to person. There is no right way or one way in programming. Let&rsquo;s consider another example of creating a simple, standard and the world famous “hello world” program, then the defacto standard is to just print hello world. This would be sufficient if you are only going to use this application practically. And for most users of the program that is true. They would just be happy when the program prints hello world.</p>
-
-<p>But we developers are not the users (are we).. The developers and the product marketing engineers will sit together in a conference room and discuss on different ways to print it out. We would think of printing every character of the sentence in a separate line, we will discuss if we have to print the &lsquo;H&rsquo; and &lsquo;W&rsquo; in upper or lower case, should we add a full stop at the end or not and so on and so forth.</p>
-
-<p>Though I’m over exaggerating, sometimes the discussion does go overboard. We tend to over engineer simple things. We miss sometimes the practical usability and concentrate more on theoretically possibilities and decide to code that way. This introduces complexity, which sometimes are not visible for the initial implementor of the code, but will come back and bite the maintainer of the code.</p>
-
-<p>So the approach should be &ndash; always <strong>choose simplicity over complexity</strong> (a point that has been made multiple times by product gurus). I’m just using different words while I still mean the same old <a href="http://simple.wikipedia.org/wiki/KISS_(principle)">KISS Principle</a> &ndash; Keep It Simple Stupid</p>
-
-<h3>Ease of Implementation</h3>
-
-<p>While I recommend simplicity, lets go to the other end of the circle of developers who mistake simplicity to easy of implementation. Sometimes it is easy to print just hello world directly. However, you should think about the possibility to extend the design with minimal changes and how your users will be affected. For instance, if the user runs the program with his name as an argument you should be able to print “hello name” instead. That is extensibility. At the same time, you should print with a new line at the end. Otherwise the user will not be able to identify the print output itself.</p>
-
-<p>So choosing easy of implementation is equally dangerous (the danger lies in the future extensibility), as to choosing complexity (which will waste your precious time now).</p>
-
-<p>Lets revisit the manufacturing shop of the table. I did not mean to say that we cannot introduce the same easy of manufacturing or the complexity in building the same table. We could choose to build a simple and not so comfortable table or we could choose a table with a motor and a sensor that will see how tall the person is and will automatically adjust the height of the table. What I meant to say was, the table manufactures and the users are on the same plane here. The users don’t require such a complexity while the table manufacturers will not spend their time and effort in building a complex one nor will they build a simple one as they have to sell the table in the end.</p>
-
-<p>The goal for me is to build a product that fixes the practical problems without overarching in trying to fix every problem that could eventually occur in the world of probabilities.</p>
-
-<p><strong>Choose simplicity over complexity and ease.</strong></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-05T17:42:21+01:00" pubdate data-updated="true">Mar 5<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/categories/development/'>development</a>, <a class='category' href='/categories/programming/'>programming</a>
-
-
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-	
-</div>
-</article>
-
-<nav id="pagenavi">
-    
-    
-    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
-</nav>
+</section>
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2014
 
@@ -479,7 +347,10 @@ What is the height of Mount Everest?</p></blockquote>
       var disqus_shortname = 'jothirams';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.jothirams.com/linux-cached-my-memory/';
+        var disqus_url = 'http://www.jothirams.com/linux-cached-my-memory/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
