@@ -209,6 +209,73 @@
 - `echo 3 &gt; /proc/sys/vm/drop_caches` - Will free pagecache, dentries and inodes
 </code></pre>
 
+<h3>Customizing /proc/sys/vm/</h3>
+
+<p>You can control the below values which would help you in freeing up the cache more often.</p>
+
+<ul>
+<li><p><strong>/proc/sys/vm/swappiness</strong></p>
+
+<p>  This controls how agressively kernel will swap memory pages out.</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Higher Values = Faster Swapping
+</span><span class='line'>Lower Values = Slow to clean up Swap
+</span><span class='line'>Value of 0 = Wait to cleanup swap until the high water mark in a zone is reached
+</span><span class='line'>Default = 60</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p><strong>/proc/sys/vm/vfs_cache_pressure</strong></p>
+
+<p>  This controls how the kernel will reclaim memory that is used for caching of directory and inode objects. <em>Note: This doesn’t affect the file caching pressure</em></p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Higher Value = Faster Cleanup of directory and inode objects  
+</span><span class='line'>Lower Value = Slow to clean up directory and inode objects  
+</span><span class='line'>Value of 0 = Never clean up directory and inode objects  
+</span><span class='line'>Default = 100 (this is a fair rate of cleanup)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p><strong>/proc/sys/vm/min_free_kbytes</strong></p>
+
+<p>  This forces the VM to keep a minimum number of configured kilobytes free for the atomic operations within the kernel. <em>Note: This is not the free memory that your userspace processes can use.</em></p>
+
+<p>  <code>Choose a value that would be needed by your kernel depending on your kernel configurations</code></p></li>
+<li><p><strong>/proc/sys/vm/dirty_background_ratio</strong></p>
+
+<p>  The percentage value of memory that can be filled with dirty pages before pdflush begins to write them.</p>
+
+<p>  <code>If you have huge memory, then the default percentage may be too high. You can lower it</code></p></li>
+<li><p><strong>/proc/sys/vm/dirty_expire_centisecs</strong></p>
+
+<p>  The hundreth of the second after which data will be considered to be expired from the page cache and will be written at the next opportunity.</p>
+
+<p>  <code>Reducing will clean up the page cache, but will trigger IO congestion</code></p></li>
+<li><p><strong>/proc/sys/vm/dirty_ratio</strong></p>
+
+<p>  The percentage value of memory that can be filled with dirty pages before the processes begin to write them.</p>
+
+<p>  <code>Reducing this will kick in pdflush when a process is writing out huge files. This would block the IO for the process momentarily</code></p></li>
+<li><p><strong>/proc/sys/vm/dirty_writeback_centisecs</strong></p>
+
+<p>  The hundredth of a second after which the pdflush wakes up to write data to disk.</p>
+
+<p>  <code>Can reduce the value to avoid data loss, however this will have an effect of IO congestion</code></p></li>
+</ul>
+
+
 <h2>Caching Tools</h2>
 
 <h3>fincore</h3>
