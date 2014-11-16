@@ -4,7 +4,7 @@
   <title><![CDATA[Category: memory | Thoughts...]]></title>
   <link href="http://www.jothirams.com/categories/memory/atom.xml" rel="self"/>
   <link href="http://www.jothirams.com/"/>
-  <updated>2014-11-16T19:12:05+01:00</updated>
+  <updated>2014-11-16T19:18:04+01:00</updated>
   <id>http://www.jothirams.com/</id>
   <author>
     <name><![CDATA[Jothiram Selvam]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Linux Cached My Memory]]></title>
-    <link href="http://www.jothirams.com/linux-cached-my-memory/"/>
+    <title type="html"><![CDATA[Linux Cached Memory]]></title>
+    <link href="http://www.jothirams.com/linux-cached-memory/"/>
     <updated>2014-11-15T16:34:25+01:00</updated>
-    <id>http://www.jothirams.com/linux-cached-my-memory</id>
-    <content type="html"><![CDATA[<p>We were running a <a href="https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller">BMC firmware (If you don’t know already, find out what the heck it is?)</a> on top of our custom linux kernel and one fine day we realized that we have developed so many applications that we forgot checking how much memory these applications were using and we were running low on available RAM.</p>
+    <id>http://www.jothirams.com/linux-cached-memory</id>
+    <content type="html"><![CDATA[<p>We were running a <a href="https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller">BMC firmware (If you don’t know already, find out what it is?)</a> on top of our custom linux kernel and one fine day we realized that we have developed so many applications that we forgot checking how much memory these applications were using and we were running low on available RAM.</p>
 
 <p>The first thing we saw was, the <code>cached</code> memory in <code>/etc/procmeminfo</code> was too high.</p>
 
